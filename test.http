@@ -1,0 +1,39 @@
+DELETE https://localhost:3002/api/posts/652415290f15aea3079e942c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV3YW5qYW1lczUyQGdtYWlsLmNvbSIsInVzZXJpZCI6IjY1MjQwYmNhMTM1N2MxNjg0YzI1NjQ5ZCIsImlhdCI6MTY5Njg2MzQwOCwiZXhwIjoxNjk2ODY3MDA4fQ.z0rxmtFdRZ4tjgSCe1V8lTxTlCYvWPEDwji4huOGw_E
+###
+
+POST https://localhost:3002/api/users/signup HTTP/1.1
+content-type: application/json
+
+{
+    "username":    "ewanjames52@gmail.com",
+    "password":    "youwillneverguess",
+    "fullName":    "Ewan James",
+    "phoneNumber": "0649091040"
+}
+###
+
+
+POST https://localhost:3002/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "ewanjames52@gmail.com",
+    "password": "youwillneverguess"
+}
+###
+
+
+POST https://localhost:3002/api/posts HTTP/1.1
+content-type: application/json
+Authorization: Bearer 
+
+{
+    "title": "Third Post",
+    "description": "This is my second post while authorized, I am still cool",
+    "departmentCode": "69"
+}
+###
+
+
+GET https://localhost:3002/api/posts HTTP/1.1
