@@ -1,0 +1,6 @@
+<div *ngFor="let post of posts">
+    {{post.title}}
+    {{post.description}}
+    {{post.code}}
+    <button (click)="ondelete(post._id)">Delete</button>
+</div>
