@@ -1,3 +1,22 @@
+<!--
 <app-post-create></app-post-create>
 <hr>
 <app-post-display></app-post-display>
+-->
+
+<main>
+    <div>
+        <h1>Bulletin Board</h1>
+
+        <nav>
+            <a routerLink="/"> List-</a>
+            <a routerLink="/add">-Add-</a>
+            <a routerLink="/login">-Login-</a>
+            <a routerLink="/signup">-Signup</a>
+        </nav>
+
+        <br>
+        <!-- This is where the route is getting displayed -->
+        <router-outlet></router-outlet>
+    </div>
+</main>
