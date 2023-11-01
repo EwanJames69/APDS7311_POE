@@ -2,16 +2,22 @@ const router = require('express').Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const sanitizeHtml = require('sanitize-html');
+// Brute-force protection middleware
+const ExpressBrute = require('express-brute');
+// In store memory for persisting request counts
+const store = new ExpressBrute.MemoryStore();
+const bruteforce = new ExpressBrute(store);
 
-router.post('/signup', (req, res) => {
+router.post('/signup', bruteforce.prevent, (req, res) => {
     bcrypt.hash(req.body.password,10)
     .then(hash => {
         const user = new User (
             {
-                username: req.body.username,
-                password: hash,
-                fullName: req.body.fullName,
-                phoneNumber: req.body.phoneNumber
+                username: sanitizeHtml(req.body.username, {allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ]}),
+                password: sanitizeHtml(hash, {allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ]}),
+                fullName: sanitizeHtml(req.body.fullName, {allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ]}),
+                phoneNumber: sanitizeHtml(req.body.phoneNumber, {allowedTags: [ 'b', 'i', 'em', 'strong', 'a' ]})
             }
         );
         user.save()
@@ -29,7 +35,7 @@ router.post('/signup', (req, res) => {
     });
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', bruteforce.prevent, (req, res) => {
     User.findOne({ username: req.body.username })
     .then(user => {
         if(!user){

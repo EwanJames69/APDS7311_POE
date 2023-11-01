@@ -7,14 +7,25 @@ const fs = require('fs')
 const helmet = require('helmet')
 const cors= require('cors')
 const hsts = require('./middleware/hsts')
+const morgan = require('morgan');
 
 mongoose.connect(process.env.mongoDBurl).then(()=> console.log('DB Connected...'));
 
 // Middleware
-app.use(cors({ origin: 'https://localhost:3000', optionsSuccessStatus: 200 }));
+app.use(cors({ origin: 'https://localhost:4200', optionsSuccessStatus: 200 }));
 app.use(express.json());
 app.use(hsts);
+// Uses Helmet middleware to secure the site
 app.use(helmet());
+// Uses Helmet middleware to prevent clickjacking
+app.use(
+    helmet({
+      frameguard: {
+        action: "deny",
+      },
+    })
+  );
+app.use(morgan('combined'));
 
 // Routes
 app.use('/api/users', require('./routes/user'))
