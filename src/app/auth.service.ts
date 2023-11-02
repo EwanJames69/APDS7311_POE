@@ -10,12 +10,12 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   get isLoggedIn(): boolean {
-    const token = localStorage.getItem('x-auth-token');
+    const token = localStorage.getItem('Authorization');
     return token ? true : false;
   }
 
   get token() {
-    return localStorage.getItem('x-auth-token');
+    return localStorage.getItem('Authorization');
   }
 
   login(username: string, password: string) {
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('x-auth-token');
+    localStorage.removeItem('Authorization');
   }
 
   signup(

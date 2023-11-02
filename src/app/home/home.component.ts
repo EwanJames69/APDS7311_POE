@@ -17,26 +17,29 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router, 
     private auth: AuthService,
-    private postsSerivce: PostsService
+    private postsService: PostsService
   ) { }
 
   ngOnInit(): void {
-    if (!this.auth.isLoggedIn) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    this.postsSerivce.getPosts().subscribe({
-      next: (v) => (this.posts = v as any),
+    this.postsService.getPosts().subscribe({
+      next: (v) => {
+        if (Array.isArray(v)) {
+          this.posts = v as any;
+        } else {
+          // Handling the case where v is not an array
+          this.posts = [];
+        }
+      },
       error: (e) => {
         this.hasError = true;
         this.errorMessage = 'An error occurred while fetching posts.';
       },
-    });    
-  }  
+    });
+  }
 
   deletePost(id: string) {
     console.log('I was summoned');
-    this.postsSerivce
+    this.postsService
       .delete(id)
       .subscribe({ next: (v) => console.log(v), error: (e) => console.log(e)})
 

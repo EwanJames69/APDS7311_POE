@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit{
     this.auth.login(this.username.value, this.password.value).subscribe({
       next: (v) => {
         const { token } = v as any;
-        localStorage.setItem('x-auth-token', token);
+        localStorage.setItem('Authorization', token);
         this.router.navigate(['/']);
       },
       error: (e) => {
