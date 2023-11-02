@@ -51,9 +51,9 @@ export class SignupComponent implements OnInit{
     // Sending an http request to create a user
     this.auth.signup(
       this.username.value,
+      this.password.value,
       this.fullName.value,
-      this.phoneNumber.value,
-      this.password.value
+      this.phoneNumber.value     
     )
     .subscribe({
       next: (v) => {

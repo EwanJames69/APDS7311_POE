@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { PostsService } from '../posts.service';
@@ -12,9 +11,6 @@ import { PostsService } from '../posts.service';
 export class HomeComponent implements OnInit {
 
   posts: any[] = [];
-  title = new FormControl('');
-  description = new FormControl('');
-  departmentCode = new FormControl('');
   hasError = false;
   errorMessage = '';
 
@@ -31,42 +27,12 @@ export class HomeComponent implements OnInit {
     }
     this.postsSerivce.getPosts().subscribe({
       next: (v) => (this.posts = v as any),
-      error: (e) => console.log(e),
-    });    
-  }
-
-  addNewPost(e: Event) {
-    // Setting the defaults
-    e.preventDefault();
-    this.hasError = false;
-
-    if (
-      !this.title.value ||
-      !this.description.value ||
-      !this.departmentCode.value
-    )
-    {
-      this.hasError = true;
-      this.errorMessage = 'Please fill in all values before continuing';
-      return;
-    }
-
-    this.postsSerivce
-    .add(this.title.value, this.description.value, this.departmentCode.value)
-    .subscribe({
-      next: (v) => {
-        this.posts.push(v);
-        this.title.setValue('');
-        this.description.setValue('');
-        this.departmentCode.setValue('');
-      },
       error: (e) => {
         this.hasError = true;
-        this.errorMessage = e.error;
-        console.log(e);
+        this.errorMessage = 'An error occurred while fetching posts.';
       },
-    });
-  }
+    });    
+  }  
 
   deletePost(id: string) {
     console.log('I was summoned');

@@ -1,1 +1,22 @@
-<p>post works!</p>
+<div class="container">
+  <h2>Add a New Post</h2>
+
+  <form (submit)="addNewPost($event)">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" class="form-control" [formControl]="title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" class="form-control" [formControl]="description" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="departmentCode">Department Code</label>
+      <input type="text" id="departmentCode" class="form-control" [formControl]="departmentCode" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Post</button>
+  </form>
+</div>
