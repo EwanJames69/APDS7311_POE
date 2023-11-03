@@ -10,15 +10,6 @@ export class PostsService {
   private readonly BASE_URL = 'https://localhost:3002/api/posts';
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  getPosts() {
-    const token = this.auth.token;
-    return this.http.get(this.BASE_URL, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-  }
-
   add(title: string, description: string, departmentCode: string) {
     const token = this.auth.token;
   

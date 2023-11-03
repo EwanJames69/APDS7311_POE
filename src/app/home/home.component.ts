@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { HttpClient } from '@angular/common/http';
 import { PostsService } from '../posts.service';
 
 @Component({
@@ -10,33 +11,36 @@ import { PostsService } from '../posts.service';
 })
 export class HomeComponent implements OnInit {
 
-  posts: any[] = [];
+  posts: any[] = []; // Initialize posts as an array
   hasError = false;
   errorMessage = '';
 
   constructor(
     private router: Router, 
     private auth: AuthService,
-    private postsService: PostsService
+    private postsService: PostsService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
-    this.postsService.getPosts().subscribe({
-      next: (v) => {
-        if (Array.isArray(v)) {
-          this.posts = v as any;
+    const baseUrl = 'https://localhost:3002/api/posts';
+
+    this.http.get(baseUrl).subscribe(
+      (response: any) => {
+        if (Array.isArray(response.posts)) {
+          this.posts = response.posts;
         } else {
-          // Handling the case where v is not an array
-          this.posts = [];
+          console.error('Invalid response structure: posts array not found.');
         }
       },
-      error: (e) => {
+      (error) => {
+        console.error('Error fetching posts:', error);
         this.hasError = true;
         this.errorMessage = 'An error occurred while fetching posts.';
-      },
-    });
+      }
+    );
   }
-
+  
   deletePost(id: string) {
     console.log('I was summoned');
     this.postsService
