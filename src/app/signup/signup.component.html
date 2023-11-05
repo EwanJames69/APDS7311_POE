@@ -1,33 +1,63 @@
-<!-- signup.component.html -->
-<form (submit)="onSubmit($event)">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" class="form-control" [formControl]="username" required>
-    </div>
-  
-    <div class="form-group">
-      <label for="fullName">Full Name</label>
-      <input type="text" id="fullName" class="form-control" [formControl]="fullName" required>
-    </div>
-  
-    <div class="form-group">
-      <label for="phoneNumber">Phone Number</label>
-      <input type="text" id="phoneNumber" class="form-control" [formControl]="phoneNumber" required>
-    </div>
-  
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" class="form-control" [formControl]="password" required>
-    </div>
-  
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" id="confirmPassword" class="form-control" [formControl]="confirmPassword" required>
-    </div>
-  
-    <!-- Displaying an error message if there is an error -->
-    <div *ngIf="hasError" class="alert alert-danger">{{ errorMessage }}</div>
-  
-    <!-- Submit button to trigger the onSubmit method -->
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+<!--
+<div class="main">
+  <p class="sign" align="center">Sign Up</p>
+  <form (submit)="onSubmit($event)">
+      <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" class="un" align="center" placeholder="Username" [formControl]="username" required>
+      </div>
+
+      <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" class="un" align="center" placeholder="Full Name" [formControl]="fullName" required>
+      </div>
+
+      <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" id="phoneNumber" class="un" align="center" placeholder="Phone Number" [formControl]="phoneNumber" required>
+      </div>
+
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="pass" align="center" placeholder="Password" [formControl]="password" required>
+      </div>
+
+      <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="pass" align="center" placeholder="Confirm Password" [formControl]="confirmPassword" required>
+      </div>
+
+      <div *ngIf="hasError" align="center" class="error-message">{{ errorMessage }}</div>
+
+      <button type="submit" class="submit">Sign Up</button>
   </form>
+</div>
+-->
+
+<div class="wrapper">
+    <h2>Registration</h2>
+    <form (submit)="onSubmit($event)">
+      <div class="input-box">
+        <input type="text" id="username" placeholder="Username" [formControl]="username" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="fullName" placeholder="Full Name" [formControl]="fullName" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="phoneNumber" placeholder="Phone Number" [formControl]="phoneNumber" required>
+      </div>
+      <div class="input-box">
+        <input type="password" id="password" placeholder="Password" [formControl]="password" required>
+      </div>
+      <div class="input-box">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" [formControl]="confirmPassword" required>
+      </div>      
+      <div class="input-box button">
+        <input type="Submit" value="Register Now">
+      </div>
+      <div *ngIf="hasError" align="center" class="error-message">{{ errorMessage }}</div>
+      <div class="text">
+        <h3>Already have an account? <a routerLink="/login">Login now</a></h3>
+      </div>
+    </form>
+  </div>

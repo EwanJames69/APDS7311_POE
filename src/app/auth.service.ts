@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   
   private readonly BASE_URL = 'https://localhost:3002/api/users';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   get isLoggedIn(): boolean {
     const token = localStorage.getItem('Authorization');
@@ -24,6 +25,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('Authorization');
+    this.router.navigate(['/login']);
   }
 
   signup(

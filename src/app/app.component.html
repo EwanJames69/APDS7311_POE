@@ -2,11 +2,12 @@
     <div>
         <h1>Bulletin Board</h1>
 
-        <nav>
-            <a routerLink="/"> List-</a>
-            <a routerLink="/add">-Add-</a>
-            <a routerLink="/login">-Login-</a>
-            <a routerLink="/signup">-Signup</a>
+        <nav class="navbar">
+            <a routerLink="/">Posts</a>
+            <a routerLink="/add">Add</a>
+            <a routerLink="/login">Login</a>
+            <a routerLink="/signup">Signup</a>
+            <a (click)="logout()">Logout</a>
         </nav>
 
         <br>
