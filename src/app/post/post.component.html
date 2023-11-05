@@ -1,22 +1,19 @@
-<div class="container">
-  <h2>Add a New Post</h2>
-
+<div class="box">
   <form (submit)="addNewPost($event)">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" id="title" class="form-control" [formControl]="title" required>
+    <span class="text-center">Add a New Post</span>
+    <div class="input-container">
+      <input type="text" required [formControl]="title" id="title">
+      <label>Title</label>
     </div>
-
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" class="form-control" [formControl]="description" required></textarea>
+    <div class="input-container">
+      <textarea required [formControl]="description" id="description"></textarea>
+      <label>Description</label>
     </div>
-
-    <div class="form-group">
-      <label for="departmentCode">Department Code</label>
-      <input type="text" id="departmentCode" class="form-control" [formControl]="departmentCode" required>
+    <div class="input-container">
+      <input type="text" required [formControl]="departmentCode" id="departmentCode">
+      <label>Department</label>
     </div>
-
-    <button type="submit" class="btn btn-primary">Add Post</button>
+    <div *ngIf="hasError" class="error-message">{{ errorMessage }}</div>
+    <button type="submit" class="btn">Add Post</button>    
   </form>
 </div>

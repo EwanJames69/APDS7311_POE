@@ -1,15 +1,18 @@
 <div class="container">
-  <h2>Welcome to the Home Page of the Bulletin Board</h2>
+  <h2 class="space-words">Welcome to the Home Page of the Bulletin Board</h2>
 
-  <!-- Display error message if there is an error -->
-  <div *ngIf="hasError" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="hasError" class="error-message">{{ errorMessage }}</div>
 
   <div class="mt-4">
-    <h3>Posts:</h3>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let post of posts">
-        {{ post.title }} - {{ post.description }}
-        <button class="btn btn-danger float-right" (click)="deletePost(post._id)">Delete</button>
+    <h3 class="space-words">Posts:</h3>
+    <ul class="post-list">
+      <li *ngFor="let post of posts" class="post">
+        <div class="post-content">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description }}</p>
+          <span>Department: {{ post.departmentCode }}</span>
+        </div>
+        <button class="delete-button" (click)="deletePost(post._id)">Delete</button>
       </li>
     </ul>
   </div>  

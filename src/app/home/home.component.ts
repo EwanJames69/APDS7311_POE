@@ -42,12 +42,27 @@ export class HomeComponent implements OnInit {
   }
   
   deletePost(id: string) {
-    console.log('I was summoned');
-    this.postsService
-      .delete(id)
-      .subscribe({ next: (v) => console.log(v), error: (e) => console.log(e)})
+    // Checking if the user is logged in
+    if (!this.auth.isLoggedIn) {
+      // Displaying an error message
+      this.hasError = true;
+      this.errorMessage = 'You are not authorized to delete a post.';
+      return;
+  }
 
-      const filtered = this.posts.filter((post) => post._id !== id);
-      this.posts = filtered;
+  this.postsService.delete(id)
+      .subscribe({
+          next: (v) => {
+              console.log(v);
+              // Remove the deleted post from the list
+              const filtered = this.posts.filter((post) => post._id !== id);
+              this.posts = filtered;
+          },
+          error: (e) => {
+              console.log(e);
+              // Handle error, show error message if necessary
+          }
+      }
+    );
   }
 }
