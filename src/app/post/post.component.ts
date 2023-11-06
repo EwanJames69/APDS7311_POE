@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
     if (!this.auth.isLoggedIn) {
       this.router.navigate(['/login']);
       return;
-    }        
+    }
   }
 
   addNewPost(e: Event) {

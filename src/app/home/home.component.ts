@@ -23,6 +23,12 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+    if (!this.auth.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    
     const baseUrl = 'https://localhost:3002/api/posts';
 
     this.http.get(baseUrl).subscribe(
@@ -59,8 +65,9 @@ export class HomeComponent implements OnInit {
               this.posts = filtered;
           },
           error: (e) => {
-              console.log(e);
-              // Handle error, show error message if necessary
+              this.hasError = true;
+              this.errorMessage = "The post was not deleted due to an error"
+              return;
           }
       }
     );
