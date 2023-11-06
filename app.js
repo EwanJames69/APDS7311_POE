@@ -12,9 +12,10 @@ const morgan = require('morgan');
 mongoose.connect(process.env.mongoDBurl).then(() => console.log('DB Connected...'));
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:4200', optionsSuccessStatus: 200 })); // Update this line
+app.use(cors({ origin: 'http://localhost:4200', optionsSuccessStatus: 200 }));
 app.use(express.json());
 app.use(hsts);
+
 // Uses Helmet middleware to secure the site
 app.use(helmet());
 // Uses Helmet middleware to prevent clickjacking
@@ -25,6 +26,8 @@ app.use(
         },
     })
 );
+
+// Use Morgan middleware to log HTTP requests in the 'combined' format
 app.use(morgan('combined'));
 
 // Routes
